@@ -1,0 +1,203 @@
+## Before the Template
+
+### Naming of your document:
+
+When you upload your document to **`Firat-Kalite-Güvencesi/Management`** repository. Make sure it's under the **Reports** file.
+
+Also,
+
+Naming of your document should be: `your-test_your-name_literature-review.md`
+
+- **Example:** `Performance_Kubra_LR.md`
+
+---
+
+### Research Analysis Log: Software Security Testing
+
+**Researcher:** Mine Kılınç
+**Date:** 04.11.2025
+
+## 1. Executive Synthesis
+
+Software Security Testing is a risk-based discipline that goes beyond merely verifying the correctness of functional security controls; it aims to ensure that software behaves correctly in the presence of a malicious adversary (McGraw, 2004; AL-Ghamdi, 2013). The core problem it addresses lies in architectural design flaws and resiliency weaknesses that traditional software testing does not typically focus on. This type of testing seeks to identify vulnerabilities that could compromise confidentiality, integrity, and availability guarantees by emulating the mindset of an attacker.
+
+The research community agrees that security testing is no longer a singular process composed solely of manual analyses but rather a multifaceted practice that must be continuously and proactively integrated into the DevSecOps pipeline (Pargaonkar, 2023). The main challenges in the field arise from the need to balance the high rate of false positives produced by automated tools (SAST/DAST) with the detection of critical, design-level flaws that still require manual expertise (Casola et al., 2024; McGraw, 2004). An open question remains whether model-based methodologies that encode the knowledge base of security experts can achieve full automation in DevSecOps environments (Kaksonen et al., 2001).
+
+This literature review suggests two critical directions for our Defect-to-Test (LLM-QA) project. First, by leveraging adversarial knowledge frameworks such as MITRE ATT&CK and CAPEC, LLMs can automatically generate test scenarios targeting complex business logic or design flaws that automated tools often struggle to detect (Casola et al., 2024). Second, positioning the LLM as an intelligent filter to reduce the false-positive rate in automated scanner outputs—and thereby allowing human experts to focus their manual review on the highest-risk areas—could serve as a key success criterion for the project.
+
+---
+
+## 2. Annotated Bibliography & Analysis
+
+
+### Article 1: Advancements in Security Testing: A Comprehensive Review of Methodologies and Emerging Trends in Software Quality Engineering
+
+**Full Citation (APA 7th Style):**
+Pargaonkar, S. (2023). Advancements in Security Testing: A Comprehensive Review of Methodologies and Emerging Trends in Software Quality Engineering. International Journal of Science and Research (IJSR), 12(8), 1-8.
+
+**In-Text Citation Example:**
+(Pargaonkar, 2023)
+
+**Summary of Contribution:**
+This article provides a comprehensive examination of security testing methodologies and emerging trends in the field of software quality engineering. In an era of continuously increasing cyber threats, it emphasizes the critical importance of integrating security testing into the early stages of the Software Development Life Cycle (SDLC). The article defines various approaches such as penetration testing, vulnerability scanning, and threat modeling. Furthermore, it highlights emerging trends such as DevSecOps integration, continuous security testing, and the role of automated analysis tools (DAST, SAST, IAST).
+
+**Key Findings & Quotations:**
+Security testing, compared to traditional testing, is a multifaceted practice aimed at uncovering a range of vulnerabilities — from code-level weaknesses to architectural flaws.
+
+“The convergence of development, operations, and security — commonly known as DevSecOps — is gaining attention as organizations recognize the necessity of integrating security throughout the entire software development life cycle.” (Pargaonkar, 2023, p. 201).
+
+Key challenges in the field of security testing include the dynamic threat landscape, the complexity of modern applications, and maintaining a delicate balance between automated scanning and manual analysis that requires human expertise.
+- [Finding 1, e.g., "The authors proved that this test method found 30% more critical defects than traditional unit tests (Smith & Jones, 2021)."]
+- [Finding 2]
+
+**Personal Analysis & Relevance to LLM-QA:**
+This article demonstrates that modern security testing is not limited to manual analysis but also requires automation integrated into the DevSecOps pipeline. The primary limitation of the study is that it is a theoretical review and does not include practical implementation results for the proposed methodologies.
+
+It provides a critical insight for the LLM-QA project: our project should focus on achieving a balance between automated scanning and manual analysis, which is essential for detecting subtle issues that automated tools might overlook. The idea is to position the LLM as an “intelligent filter” or “manual analysis assistant” that eliminates the high rate of false positives generated by existing SAST/DAST tools and identifies contextual risks.
+
+---
+
+### Article 2: A Survey on Software Security Testing Techniques
+
+**Full Citation (APA 7th Style):**
+L-Ghamdi, A. S. A. (2013). A Survey on Software Security Testing Techniques. International Journal of Computer Science and Telecommunications, 4(4), 14–18.L-Ghamdi, A. S. A. (2013). A Survey on Software Security Testing Techniques. International Journal of Computer Science and Telecommunications, 4(4), 14–18.
+
+**In-Text Citation Example:**
+(AL-Ghamdi, 2013)
+
+**Summary of Contribution:**
+This survey article provides an overview of software security testing techniques and examines their role in ensuring software security. The paper begins with the argument that software meeting functional and performance requirements is not necessarily secure. It defines reliability, resiliency, and recoverability as the fundamental components of software assurance. Additionally, it explains various testing techniques such as code reviews, automated static analysis, fuzz testing, and penetration testing.
+
+**Key Findings & Quotations:**
+The core quality components of software assurance consist of reliability, resiliency, and recoverability. Resiliency is defined as “the ability to withstand attempts by an adversary to compromise integrity, confidentiality, and availability.”
+
+“Security testing is not the same as testing the correctness and competence of security function implementations; it only reveals a small portion of the depiction needed to validate software security.” (AL-Ghamdi, 2013, p. 999).
+
+Manual source code review (White Box Testing) can uncover many serious security weaknesses that cannot be detected by automated tools.
+
+**Personal Analysis & Relevance to LLM-QA:**
+This paper clarifies the fundamental philosophy of security testing and emphasizes its primary difference from traditional testing: the presence of an intelligent adversary. An important takeaway for the LLM-QA project is that our effort should focus on **resiliency**, not just on whether functional security controls work correctly. The LLM’s ability to generate inputs for fuzz testing directly relates to the idea discussed in the paper — “sending a combination of inputs to the software to observe how it responds.” This offers an opportunity for the LLM to contribute to automated testing tools by modeling **synthetic attacker behaviors**.
+
+---
+
+### Article 3: Secure software development and testing: A model-based methodology
+
+**Full Citation (APA 7th Style):**
+Casola, V., De Benedictis, A., Mazzocca, C., & Orbinato, V. (2024). Secure software development and testing: A model-based methodology. Computers & Security, 137, 103639. https://doi.org/10.1016/j.cose.2023.103639
+
+**In-Text Citation Example:**
+(Casola vd., 2024)
+
+**Summary of Contribution:**
+This article proposes a model-based security development methodology designed to support developers with limited security expertise and to be integrated into modern DevSecOps pipelines. The methodology uses a comprehensive reference security model that links information about system assets, threats, countermeasures (controls), and related testing strategies. This approach aims to partially automate the most critical tasks that traditionally require manual intervention by security experts. The security testing strategy is based on MITRE’s CAPEC and ATT&CK frameworks, which organize knowledge about adversarial behaviors.
+
+**Key Findings & Quotations:**
+Although automated tools such as SAST and DAST exist, “manual intervention by security experts is still necessary not only for security analysis and design but also to configure and elaborate the output of security testing tools.”
+
+The proposed methodology enables developers to “automatically define a security test plan for their applications” and to provide corresponding security tests to be reproduced.
+
+The security testing strategy is based on MITRE Corporation’s CAPEC (Common Attack Pattern Enumeration and Classification) and ATT&CK (Adversarial Tactics, Techniques & Common Knowledge) frameworks, which structure information about adversarial behaviors.
+
+**Personal Analysis & Relevance to LLM-QA:**
+This article is one of the most significant sources that can guide the design of the LLM-QA project. The main limitation of the study is that, although it achieves partial automation, it does not reach full automation.
+
+The LLM-QA project can bridge this gap: by encoding the security expert’s knowledge base (the reference security model) and understanding and utilizing MITRE CAPEC/ATT&CK patterns, the LLM can automatically generate realistic security testing scenarios based on an application’s characteristics—more efficiently than a standard test plan.
+
+This provides a clear roadmap for the LLM to automate the most challenging aspects of model-based testing: “defining the test plan” and “reproducing the tests.”
+
+---
+
+### Article 4: Software Security Testing
+
+**Full Citation (APA 7th Style):**
+McGraw, G. (2004). Software Security Testing. IEEE Security & Privacy, 2(2), 80-83.
+
+**In-Text Citation Example:**
+(McGraw, 2004
+
+**Summary of Contribution:**
+This article explains how software security testing fundamentally differs from traditional functional testing and outlines how it should be conducted properly. The author argues that security testing must go beyond simple “black-box” inspection. Security testers, he emphasizes, should use risk-based approaches grounded in both the architectural reality of the system and the attacker’s mindset to adequately evaluate software security. The article categorizes vulnerabilities into two main types: implementation-level bugs and design-level flaws.
+
+**Key Findings & Quotations:**
+Software security is about ensuring that software behaves correctly in the presence of malicious attacks, even though most software bugs occur without intentional malice.
+
+“Testers must employ risk-based approaches grounded in both the architectural reality of the system and the attacker’s mindset to adequately measure software security.” (McGraw, 2004, p. 2439)
+
+Design-level vulnerabilities are the most challenging yet most common and critical category of flaws, and detecting them automatically is particularly difficult.
+
+**Personal Analysis & Relevance to LLM-QA:**
+This article provides the philosophical foundation of security testing—the necessity of simulating an attacker’s mindset. Its main limitation lies in its publication date (2004), as it does not address modern DevSecOps automation trends. However, it offers a valuable insight for the LLM-QA project: an LLM’s natural language understanding capabilities make it ideal for mimicking the attacker’s mindset when analyzing code or architectural diagrams. By learning and applying textual attack patterns used by penetration testers (including the design-level flaws discussed by McGraw), the LLM can help target critical design-level vulnerabilities that automated tools often struggle to detect.
+
+---
+
+### Article 5: SOFTWARE SECURITY ASSESSMENT THROUGH SPECIFICATION MUTATIONS AND FAULT INJECTION
+
+**Full Citation (APA 7th Style):**
+Kaksonen, R., Laakso, M., & Takanen, A. (2001). SOFTWARE SECURITY ASSESSMENT THROUGH SPECIFICATION MUTATIONS AND FAULT INJECTION. In R. Steinmetz et al. (Eds.), Communications and Multimedia Security Issues of the New Century (pp. 173–183). IFIP International Federation for Information Processing 2001
+
+**In-Text Citation Example:**
+(Kaksonen vd., 2001)
+
+**Summary of Contribution:**
+This paper presents a practical fault-injection–based approach for software security assessment. The approach relies on protocol specifications and uses specification mutations to produce malformed, unexpected, or intentionally corrupted inputs. This method evaluates the software’s robustness against exceptional inputs and events and is effective at revealing behaviors such as crashes and hangs that can trigger security vulnerabilities. The method was tested on a WAP gateway application and proved effective at systematically exposing robustness issues.
+
+**Key Findings & Quotations:**
+“Fault injection is a testing method used to assess software robustness… the software’s ability to cope with injected faults is examined.”
+
+Fault injection is suitable for security assessment because it simulates attacks carried out through external interfaces (for example, network connections).
+
+“The main impact is the early removal of insignificant security vulnerabilities and increased awareness of robustness issues and their security consequences.” (Kaksonen et al., 2001, p. 2704).
+
+**Personal Analysis & Relevance to LLM-QA:**
+
+This paper presents a systematic security assessment technique that resembles fuzzing (sending large volumes of randomized inputs). Its main limitation is the heavy reliance on protocol specifications, whereas modern applications also contain complex business-logic bugs that are not protocol-bound. An important opportunity for the LLM-QA project is that LLMs can automatically read protocol specifications (or API documentation) and, by emulating Kaksonen’s “specification mutation” principle, generate malformed or exceptional inputs (faults). This strengthens the idea of using an LLM as an input generator for a comprehensive, targeted fuzzing/fault-injection tool—helpful especially in early lifecycle stages for weeding out low-impact security issues.
+[...]
+
+---
+
+### 3. Appendix: How to Cite (A Brief Guide)
+
+You must cite your resources in your work. This is non-negotiable for academic work.
+
+**What is Citing and Why Do We Do It?**
+
+Citation is the practice of giving credit to the sources you use. In research, failing to cite is considered **plagiarism**, which is the theft of intellectual property and the most severe academic offense.
+
+We cite for two reasons:
+
+1.  **To give credit:** To acknowledge the work of the researchers who came before us.
+2.  **To provide a trail:** To allow your reader (me, or the reviewers of our paper) to find the exact source you used and verify your claims.
+
+**Two Types of Citation:**
+
+We are using both in articles.
+
+1.  **In-Text Citation:** A brief note _inside_ your sentence to show where the idea came from.
+
+    - **Example:** The "Defect-to-Test" model is superior because it provides a "permanent safety net" (Your Team's Abstract, 2025).
+    - **Example:** Smith (2021) argues that mutation testing is too slow for CI/CD pipelines.
+
+2.  **Full Citation (Bibliography/Reference List):** The full details of the source, listed at the end of your document. This is what allows the reader to find the source.
+
+**How to Format a Full Citation (APA 7th Edition)**
+
+Use these templates based on the source type.
+
+> **Template 1: Journal/Conference Article**
+> Author, A. A., Author, B. B., & Author, C. C. (Year). Title of the article: Subtitle if any. _Title of the Journal or Conference Proceedings, Volume_(Issue), pages. DOI (Digital Object Identifier)
+>
+> **Example:** De Millo, R. A., Lipton, R. J., & Perlis, A. J. (1979). Social processes and proofs of theorems and programs. _Communications of the ACM, 22_(5), 271–280. [https://doi.org/10.1145/359104.359106](https://doi.org/10.1145/359104.359106)
+
+> **Template 2: Website or Blog Post**
+> Author, A. A. (Year, Month Day). Title of the work. _Website Name_. URL
+>
+> **Example:** Fowler, M. (2014, January 21). TestCoverage. _Martin Fowler's Blog_. [https://martinfowler.com/bliki/TestCoverage.html](https://martinfowler.com/bliki/TestCoverage.html)
+
+> **Template 3: Book**
+> Author, A. A. (Year). _Title of work_ (Edition, if any). Publisher.
+>
+> **Example:** Hunt, A., & Thomas, D. (2000). _The Pragmatic Programmer: From Journeyman to Master_. Addison-Wesley Professional.
+
+---
+
+## | This template is prepared by Ali Bulut and Google Gemini
