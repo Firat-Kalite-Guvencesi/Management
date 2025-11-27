@@ -1,124 +1,149 @@
-Deneysel Uygulama Günlüğü
-Araştırmacı: Esra Nur Gümüş
-Tarih: 27 Kasım 2025
-Görev: OWASP Juice Shop Fonksiyonel Test Uygulaması
+# Deneysel Uygulama Günlüğü
 
-1. Yönetici Özeti
-Paragraf 1: Sonuç
-Benim özel hedefim, literatür taramasında ve test planında belirtildiği gibi, OWASP Juice Shop web dağıtımının temel fonksiyonel kütüphaneleri (login verileri, arama fonksiyonu, menü yönlendirmeleri, sayfa yükleme, form çıkışı) doğru çalıştığını kanıtlamaktı. Bu hedefe Python Playwright ve Pytest kullanarak 34 fonksiyonel test senaryosuna ulaştım. Tüm testler başarıyla çalıştı (%100 başarı oranı) ve temel kullanıcı kullanımlarının beklendiği gibi çalışılması doğrulandı. Bu fonksiyonel testler, giriş sonuçları (boş alan kontrolü, hatalı giriş, başarılı giriş), arama sonuçlarının giriş sonuçları tetiklemesi, menü/buton yönlendirmelerinin (Puan Tablosu, Ürünler sayfaları) doğru rota'lara gitmesi, sayfaların yüklenmesi ve temel UI öğelerinin görünmesi, form çıkışı ve hatalarının gibi ana işlemleri.
+**Araştırmacı:** Esra Nur Gümüş  
+**Tarih:** 27 Kasım 2025  
+**Görev:** OWASP Juice Shop Fonksiyonel Test Uygulaması
 
-Paragraf 2: Deneyim
-Docker Compose ile OWASP Juice Shop'un kurulumu oldukça verimliydi ve uygulanması localhost:3000 üzerinde çalıştırılmasını sağladı. Ancak Python Playwright ile tarayıcı tabanlı fonksiyonel testler yazmak, başlangıçta beklenenden daha karmaşıktı. Karşılaştığı en büyük "sorun" DOM ​​seçicinin stabilitesi ve Angular'ın dayanıklı dinamik yapısıydı: OWASP Juice Shop'un Angular tabanlı yapısı nedeniyle bazı elementlerin dinamik olarak yüklenmesi gerekiyordu ve selector'ların pratik ve stabil olması gerekiyordu. Ayrıca, testin birbirini etkilememesini sağlamak ve yönlendirmek için URL ve öğe izolasyonunun doğru yapılması önemli zaman gerektirdi. Bu sürecin, önemli olmayan bir zaman gerektirdi ancak sonuçta sağlam ve prosedür çalışmaları yer aldı.
+---
 
-2. Kurulum ve Yapılandırma
-Kullanılan Araç(lar): Docker Compose v2.0+, Python v3.13.3, Python Playwright kütüphanesi, Pytest framework
+## 1. Yönetici Özeti
 
-Kurulum için Tahmini Süresi: 60 dakika (Ortam) + 120 dakika (Test Kodları)
+### Paragraf 1: Sonuç
 
-Kurulum ve Yapılandırma Günlüğü
-Docker Compose kullanılarak yapılan ortam kurulumu ( docker-compose.ymlayrıntılı olarak ayrıntılı olarak açıklandığı gibi) oldukça verimliydi ve OWASP Juice Shop'un çalıştırılabilir localhost:3000 üzerinde çalıştırılması sağlandı. İlk 60 dakika, Docker Desktop kurulumu, WSL 2 kurulumu (Ubuntu kurulumu), Container'ın çalıştırıldığı ve kaydedilen portunda (3000) erişilebilir olduğundan sürekli olarak ayrılır. Sürtünme, test kodları yazma aşamasında başladı çünkü Playwright ile tarayıcı otomasyonu yapmak, DOM selector'larının stabil hale getirilmesi, test yalıtımının korunmasını ve Angular yapısal dinamik yapının uygun testlerin yazılmasının sağlanmasıdu. 120 dakika, 34 fonksiyonel test senaryosunun yazılması, toplam seçicilerin optimize edilmesi ve test akışlarının değişiminin etkilenmemesi için harcandı.
+Benim özel hedefim, literatür taramasında ve test planında belirtildiği gibi, OWASP Juice Shop web uygulamasının temel fonksiyonel özelliklerinin (login akışı, arama fonksiyonu, menü yönlendirmeleri, sayfa yükleme, form davranışları) doğru çalıştığını kanıtlamaktı. Bu hedefe Python Playwright ve Pytest kullanarak 34 fonksiyonel test case yazarak başarıyla ulaştım. Tüm testler başarıyla çalıştı (%100 başarı oranı) ve uygulamanın temel kullanıcı akışlarının beklendiği gibi çalıştığını doğruladım. Bu fonksiyonel testler, login akışının (boş alan kontrolü, hatalı giriş, başarılı giriş), arama çubuğunun input alıp sonuçları tetiklemesi, menü/buton yönlendirmelerinin (Score Board, Products sayfaları) doğru route'lara gitmesi, sayfaların yüklenme ve temel UI elementlerinin görünürlüğü, form davranışları ve hata mesajlarının doğruluğu gibi ana kullanıcı akışlarını kapsamaktadır.
 
-3. Uygulama Günlüğü: "Yolculuk"
-Hedef Fonksiyonellik: OWASP Juice Shop'un temel kullanıcı işlemlerinin işlevsel olarak test edildiği (Giriş, Arama, Gezinme, UI, Form devam ediyor).
+### Paragraf 2: Deneyim
 
-İşlem Günlüğü
-Kurulum ve Doğrulama (60 dk):
+Docker Compose ile OWASP Juice Shop'un kurulumu oldukça verimliydi ve uygulamanın localhost:3000 üzerinde çalışmasını sağladı. Ancak Python Playwright ile browser-based fonksiyonel testler yazmak, başlangıçta beklenenden daha karmaşıktı. Karşılaştığım en büyük "sorun" DOM selector'larının stabilitesi ve Angular uygulamasının dinamik yapısıydı: OWASP Juice Shop'un Angular tabanlı yapısı nedeniyle bazı elementler dinamik olarak yükleniyordu ve selector'ların gerçekçi ve stabil olması gerekiyordu. Ayrıca, test izolasyonu sağlamak (her testin birbirini etkilememesi) ve yönlendirme sonrası URL ve element doğrulamalarının doğru yapılması önemli zaman gerektirdi. Bu süreç, kodlama dışı önemli bir zaman gerektirdi ancak sonuçta sağlam ve gerçekçi testler oluşturuldu.
 
-Docker Masaüstü kurulumu ve ayarları
-WSL 2 kurulumu (Ubuntu)
-Python 3.13.3 kurulumu ve PATH kurulumu
-Tüm Python programlamalarının yazılımı (Playwright, Pytest, vb.)
-Oyun yazarı tarayıcılarının yazmaları
-OWASP Juice Shop Container'ının çalıştırılmasının doğrulanması ( docker compose ps)
-Uygulamanın localhost:3000 üzerinden erişilebilir biçimde doğrulanması ( test_connection.py)
-Test Kodları Yazma (120 dk):
+---
 
-Test bilgisayarındaki ( tests/programların)
-Pytest fikstürlerinin yazılması ( conftest.py- tarayıcı, bağlam, sayfa)
-Yapılandırma oranlarının değerleri ( config.py- selector'lar, URL'ler)
-Yardımcı kapasitesinin yazılması ( helpers.py- giriş yapma, çıkış yapma)
-5 test payının yazılması:
-test_login.py(5 test vakası)
-test_search.py(5 test vakası)
-test_navigation.py(6 test vakası)
-test_ui.py(10 test vakası)
-test_forms.py(8 test vakası)
-Takılı Kaldığım Nokta: Selector Stabilitesi ve Test İzolasyonu (40 dk):
+## 2. Kurulum ve Yapılandırma
 
-Asıl zorluklar, DOM seçicilerin stabil hale getirilmesi ve gerçekleştirilmesinin sağlanması. Açısal değişikliklerin bazı elementler dinamik olarak yükleniyordu ve selector'ların piyasaya sürülme kapasitesi uygun çalışması gerekiyordu. Özellikle:
+**Kullanılan Araç(lar):** Docker Compose v2.0+, Python v3.13.3, Python Playwright kütüphanesi, Pytest framework
 
-Arama bileşeni'i ( #searchQuery) bir Angular bileşeni'ti ve İçindeki gerçek girdi'u mevcuttu
-Vücut elementinin bazen "gizli" olması nedeniyle farklı yöntem yöntemleri kullanılması gerekti
-Testin izolasyonu için yeni bir tarayıcı içeriğinin kullanılması gerekiyordu
-Form doğrulama testlerinde devre dışı buton kontrolü yapmak gerekiyordu
-Test başvuruları ve Optimizasyon (30 dk):
+**Kurulum için Tahmini Süre:** 60 dakika (Ortam) + 120 dakika (Test Kodları)
+
+### Kurulum ve Yapılandırma Günlüğü
+
+Docker Compose kullanılarak yapılan ortam kurulumu (`docker-compose.yml` dosyasında ayrıntılı olarak açıklandığı gibi) oldukça verimliydi ve OWASP Juice Shop uygulamasının localhost:3000 üzerinde çalışmasını sağladı. İlk 60 dakika, Docker Desktop kurulumu, WSL 2 yapılandırması (Ubuntu kurulumu), container'ın çalıştığını ve belirlenen portunda (3000) erişilebilir olduğunu doğrulamaya ayrıldı. Sürtünme, test kodları yazma aşamasında başladı çünkü Playwright ile browser automation yapmak, DOM selector'larının stabil olmasını, test izolasyonunun sağlanmasını ve Angular uygulamasının dinamik yapısına uygun testlerin yazılmasını gerektiriyordu. Toplam 120 dakika, 34 fonksiyonel test case'in yazılması, selector'ların optimize edilmesi ve test akışlarının birbirini etkilememesi için harcandı.
+
+---
+
+## 3. Uygulama Günlüğü: "Yolculuk"
+
+**Hedef Fonksiyonellik:** OWASP Juice Shop'un temel kullanıcı akışlarının fonksiyonel testleri (Login, Arama, Navigation, UI, Form davranışları).
+
+### İşlem Günlüğü
+
+**Kurulum ve Doğrulama (60 dk):** 
+- Docker Desktop kurulumu ve yapılandırması
+- WSL 2 kurulumu (Ubuntu)
+- Python 3.13.3 kurulumu ve PATH yapılandırması
+- Tüm Python bağımlılıklarının yüklenmesi (Playwright, Pytest, vb.)
+- Playwright browser'larının yüklenmesi
+- OWASP Juice Shop container'ının çalıştığının doğrulanması (`docker compose ps`)
+- Uygulamanın localhost:3000 üzerinden erişilebilir olduğunun doğrulanması (`test_connection.py`)
+
+**Test Kodları Yazma (120 dk):**
+- Test klasör yapısının oluşturulması (`tests/` klasörü)
+- Pytest fixtures'ların yazılması (`conftest.py` - browser, context, page)
+- Konfigürasyon dosyasının oluşturulması (`config.py` - selector'lar, URL'ler)
+- Yardımcı fonksiyonların yazılması (`helpers.py` - login, logout fonksiyonları)
+- 5 test dosyasının yazılması:
+  - `test_login.py` (5 test case)
+  - `test_search.py` (5 test case)
+  - `test_navigation.py` (6 test case)
+  - `test_ui.py` (10 test case)
+  - `test_forms.py` (8 test case)
+
+**Takılı Kaldığım Nokta: Selector Stabilitesi ve Test İzolasyonu (40 dk):**
+
+Asıl zorluk, DOM selector'larının stabil ve gerçekçi olmasını sağlamaktı. Angular uygulamasında bazı elementler dinamik olarak yükleniyordu ve selector'ların uygulamanın varsayılan yapısına uygun çalışması gerekiyordu. Özellikle:
+- Arama component'i (`#searchQuery`) bir Angular component'ti ve içindeki gerçek input'u bulmak gerekiyordu
+- Body elementinin bazen "hidden" olması nedeniyle farklı doğrulama yöntemleri kullanmak gerekti
+- Test izolasyonu için her testin yeni bir browser context kullanması gerekiyordu
+- Form validasyon testlerinde disabled buton kontrolü yapmak gerekiyordu
+
+**Test Düzeltmeleri ve Optimizasyon (30 dk):**
 
 İlk test çalıştırmasında bazı testler başarısız oldu. Bu testleri düzeltmek için:
+- Body visibility sorunlarını çözdüm (body yerine URL ve sayfa başlığı kontrolü)
+- Search input selector'larını düzelttim (Angular component içindeki input'u bulma)
+- Form validasyon testlerini güncelledim (disabled buton kontrolü)
+- Navigation testlerindeki URL kontrol mantığını iyileştirdim
 
-Gövde görünürlük sorunları çözülmüyor (gövdenin yerine URL ve sayfa ana başlık kontrolü)
-Arama giriş seçici'lerini düzelttim (Açısal bileşen içindeki giriş'u bulma)
-Form doğrulama testlerini güncelledim (devre dışı buton kontrolü)
-Gezinme testlerindeki URL kontrolünü insan iyileştirmedim
-İspatın Sonlandırılması (20 dk):
+**İspatın Sonlandırılması (20 dk):**
 
-Tüm testler başarıyla uygulandı ve %100 başarı oranı elde edildi (34/34 test başarılı). Test raporunun HTML formatı oluşturuldu ( reports/report.html) ve tüm fonksiyonelliklerin büyüklüğü doğrulandı.
+Tüm testler başarıyla çalıştırıldı ve %100 başarı oranı elde edildi (34/34 test başarılı). Test raporu HTML formatında oluşturuldu (`reports/report.html`) ve tüm fonksiyonelliklerin doğru çalıştığı kanıtlandı.
 
-En Büyük "Sorun" / "Zorluk":
+**En Büyük "Sorun" / "Zorluk":**
 
-En sinir bozucu kısım, Açısal kırılmanın dinamik yapısı nedeniyle seçicilerin stabil olmamasıydı. Özellikle:
+En sinir bozucu kısım, Angular uygulamasının dinamik yapısı nedeniyle selector'ların stabil olmamasıydı. Özellikle:
+- Arama component'i bir Angular component'ti ve içindeki gerçek input'u bulmak için component'e tıklayıp dialog'u açmak gerekiyordu
+- Body elementinin bazen "hidden" olması nedeniyle farklı doğrulama yöntemleri kullanmak gerekti
+- Test izolasyonu sağlamak için her testin yeni bir browser context kullanması gerekiyordu
 
-Arama bileşeni'i bir Angular bileşeni'ti ve içindeki gerçek giriş'u bulmak için bileşeni'e açmak diyalog'u açmak gerekiyordu
-Vücut elementinin bazen "gizli" olması nedeniyle farklı yöntem yöntemleri kullanılması gerekti
-Testin izolasyonunu sağlamak için yeni bir tarayıcı içeriğinin kullanılması gerekiyordu
-Ancak bu zorluklar, kalıcı ve stabil testlerin yazılmasına yol açtı ve uygulanması gerçek kullanım senaryolarını daha iyi yansıttı.
+Ancak bu zorluklar, gerçekçi ve stabil testler yazılmasına yol açtı ve uygulamanın gerçek kullanım senaryolarını daha iyi yansıttı.
 
-4. Son Eserler
-Kod Deposu/Özet Bağlantısı:
+---
 
-GitHub Deposu: https://github.com/EsraGumus7/yazilim-kalite-hata-kanit
-Test Dosyaları: tests/parçalar (5 test dosyası, 34 test senaryosu)
-Dokumantasyon: belgeler/ve senaryolar/klasörleri
-Test Planı: test_planı.md(Test durumu tablosu ile)
-Test Sonuçları:
+## 4. Son Eserler
 
-Toplam Test Sayısı: 34
-Başarılı Testler: 34
-Başarısız Testler: 0
-Başarı Oranı: %100
-Test Süresi: ~2,5 dakika
+**Kod Deposu/Özet Bağlantısı:** 
+- GitHub Repository: https://github.com/EsraGumus7/yazilim-kalite-hata-kanit
+- Test Dosyaları: `tests/` klasörü (5 test dosyası, 34 test case)
+- Dokümantasyon: `belgeler/` ve `senaryolar/` klasörleri
+- Test Planı: `test_planı.md` (Test durumu tablosu ile)
 
-5. LLM-QA ile Yansıma ve İlgililik
-Manuel Sürecin Analizi
-Manuel fonksiyonel test yazma süreci, "altın veri" kaydı için değerli olsa da, ciddi hasar parçalanmasından muzdariptir. Bu süreç, test yazıcısının üç yerden manuel olarak bilgi toplamasını gerektirir:
+**Test Sonuçları:**
+- Toplam Test Sayısı: 34
+- Başarılı Testler: 34
+- Başarısız Testler: 0
+- Başarı Oranı: %100
+- Test Süresi: ~2.5 dakika
 
-Test planı ve değişiklikleri (Hedef işlevsellikleri: giriş, arama, gezinme, kullanıcı arayüzü, form)
-Uygulama yapısı ve seçiciler (OWASP Juice Shop'un Angular yapısı, DOM elementleri)
-Test aracının belgeleri (Playwright API, Pytest fikstürleri, iddia metodları)
-Alan bilgisi (fonksiyonel test çözümleri), araç söz dizimi (Playwright/Pytest) ve uygulama yapısı (Angular, selector'lar) arasındaki bu geçiş, süreci aşırı derecede yavaş ve hataya açık hale gelir. Özellikle selector'ların stabil olması, test izolasyonunun sürdürülmesi ve Açısal aralıkların dinamik özellikleri uygun testlerin yazılması için önemli zaman harcandı.
+## 5. LLM-QA ile Yansıma ve İlgililik
 
-LLM-QA Nasıl Yardımcı Olabilirdi
-Aracımız burada değişebilecektir. LLM-QA sistemini şunu belirtebilirim:
+### Manuel Sürecin Analizi
 
-" test_planı.mdve docker-compose.ymlödemelerin analiz et. OWASP Juice Shop (localhost:3000) giriş verilerinin (boş alan, hatalı giriş, başarılı giriş), arama sonuçların giriş sonuçları tetiklemesi, menü/buton yönlendirmelerinin (Score Board, Products) doğru rota'lara gitmesi, sayfaların doldurulması ve temel UI elemanlarının göründüğü, form çıkışı ve hata mesajlarının çalıştığı gibi ana bilgisayarlarını test eden Python Playwright testleri oluşturmak. Açısal yapının dinamik yapıya uygun olması gerekir."
+Manuel fonksiyonel test yazma süreci, "altın veri" üretmek için değerli olsa da, ciddi bağlam parçalanmasından muzdariptir. Bu süreç, test yazıcının üç yerden manuel olarak bilgi toplamasını gerektirir: 
+1. Test planı ve gereksinimler (Hedef fonksiyonellikler: login, arama, navigation, UI, form)
+2. Uygulama yapısı ve selector'lar (OWASP Juice Shop'un Angular yapısı, DOM elementleri)
+3. Test aracının belgeleri (Playwright API, Pytest fixtures, assertion metodları)
 
-LLM anlık olarak yapabiliyordu:
+Alan bilgisi (fonksiyonel test gereksinimleri), araç sözdizimi (Playwright/Pytest) ve uygulama yapısı (Angular, selector'lar) arasındaki bu geçiş, süreci aşırı derecede yavaş ve hataya açık hale getirir. Özellikle selector'ların stabil olması, test izolasyonunun sağlanması ve Angular uygulamasının dinamik yapısına uygun testlerin yazılması için önemli zaman harcandı.
 
-Test planını analiz edebilir: 34 test senaryosunun sonuçlarını anlayabilir
-Uygulamayı anlayabilir: OWASP Juice Shop'un Angular, selector'larını ve Route'larını analiz edebilir
-Doğru test işlemlerini gerçekleştirir: Playwright API'sini kullanarak stabil, izolasyonlu ve izolasyonlu testler yazabilir
-Selector değişimiu yapabilir: Angular Component'leri, dinamik elementler için doğru seçici stratejilerini uygulayabilir
-Test izolasyonu sağlayabilir: Testi için yeni tarayıcı bağlamı otomatik olarak yapılandırılabilir
-Bu arada, selector'ların stabil olması, test izolasyonunun yalıtımı ve Açısal dayanıklı dinamik yapılar uygun testlerin yazılması için harcadığım 120 dakikadan önemli tasarruf sağlayabilirdi. Ayrıca test kodlarının daha iyi birleştirilmesi ve bakımının kolaylaştırılması sağlanıyordu.
+### LLM-QA Nasıl Yardımcı Olabilirdi
 
-LLM-QA'nın Özel Değeri
-Bu projede LLM-QA'nın özel değerleri şu şekilde olacaktı:
+Aracımız burada devrim niteliğinde olabilirdi. LLM-QA sistemine şunu söyleyebilirdim: 
 
-Çoklu Bağlam Entegrasyonu: Test planı, uygulama yapısı ve test aracı belgeleri tek birleştirilebilir birleştirilebilirdi
-Selector Optimizasyonu: Açısal dinamik yapıya uygun selector stratejilerini otomatik olarak önerebilirdi
-Test İzolasyonu: Test için yeni tarayıcı bağlamı otomatik olarak yapılandırılabilirdi
-Hata Önleme: Yaygın hatalar (gövde görünürlüğü, seçici stabilitesi, test izolasyonu) önceden tespit edilip çözülebilirdi
-Dokumantasyon Entegrasyonu: Test senaryolarını, test kodlarını ve test planını otomatik olarak doldurabilirdi
-Bu, manuel olarak harcanan 120 dakikalık önemli miktarlarda ve daha kaliteli, bakımı kolay test kodlarını sağlayabilmektedir.
+**"`test_planı.md` ve `docker-compose.yml` dosyalarını analiz et. OWASP Juice Shop uygulamasında (localhost:3000) login akışının (boş alan, hatalı giriş, başarılı giriş), arama çubuğunun input alıp sonuçları tetiklemesi, menü/buton yönlendirmelerinin (Score Board, Products sayfaları) doğru route'lara gitmesi, sayfaların yüklenme ve temel UI elementlerinin görünürlüğü, form davranışları ve hata mesajlarının doğruluğu gibi ana kullanıcı akışlarını test eden Python Playwright testleri oluştur. Testler stabil selector'lar kullanmalı, test izolasyonu sağlamalı ve Angular uygulamasının dinamik yapısına uygun olmalı."**
 
-Sonuç
-Bu uygulama, OWASP Juice Shop üzerinde 34 fonksiyonel test senaryosu ile ulaşılan kanıt temel kullanımlarının doğru çalışmasını başarıyla gerçekleştirdi. %100 başarı oranı ile tüm testler yapıldı ve oynatılması, oturum açma, arama, gezinme, kullanıcı arayüzü ve form oluşması gibi ana işlevselliklerinin beklendiği gibi doğrulanması sağlandı. LLM-QA sisteminin bu sürecin kullanılması, test yazma süresinin önemli ölçüde artması ve daha kaliteli, bakımı kolay test kodlarının çalışmasını sağlar.
+LLM anında şunları yapabilirdi:
+1. **Test planını analiz edebilir:** 34 test case'in gereksinimlerini anlayabilir
+2. **Uygulama yapısını anlayabilir:** OWASP Juice Shop'un Angular yapısını, selector'larını ve route'larını analiz edebilir
+3. **Doğru test kodunu oluşturabilir:** Playwright API'sini kullanarak stabil, gerçekçi ve izole testler yazabilir
+4. **Selector optimizasyonu yapabilir:** Angular component'leri, dinamik elementler için doğru selector stratejilerini uygulayabilir
+5. **Test izolasyonu sağlayabilir:** Her test için yeni browser context kullanımını otomatik olarak yapılandırabilir
+
+Bu yaklaşım, selector'ların stabil olması, test izolasyonunun sağlanması ve Angular uygulamasının dinamik yapısına uygun testlerin yazılması için harcadığım 120 dakikadan önemli ölçüde tasarruf edebilirdi. Ayrıca, test kodlarının daha tutarlı ve bakımı kolay olmasını sağlayabilirdi.
+
+### LLM-QA'nın Özel Değeri
+
+Bu projede LLM-QA'nın özel değeri şu alanlarda olurdu:
+
+1. **Çoklu Bağlam Entegrasyonu:** Test planı, uygulama yapısı ve test aracı belgelerini tek bir bağlamda birleştirebilirdi
+2. **Selector Optimizasyonu:** Angular uygulamasının dinamik yapısına uygun selector stratejilerini otomatik olarak önerebilirdi
+3. **Test İzolasyonu:** Her test için yeni browser context kullanımını otomatik olarak yapılandırabilirdi
+4. **Hata Önleme:** Yaygın hataları (body visibility, selector stabilitesi, test izolasyonu) önceden tespit edip çözebilirdi
+5. **Dokümantasyon Entegrasyonu:** Test senaryolarını, test kodlarını ve test planını otomatik olarak senkronize edebilirdi
+
+Bu, manuel süreçte harcanan 120 dakikayı önemli ölçüde azaltabilir ve daha kaliteli, bakımı kolay test kodları üretilmesini sağlayabilirdi.
+
+---
+
+## Sonuç
+
+Bu deneysel uygulama, OWASP Juice Shop üzerinde 34 fonksiyonel test case yazarak uygulamanın temel kullanıcı akışlarının doğru çalıştığını başarıyla kanıtladı. %100 başarı oranı ile tüm testler geçti ve uygulamanın login, arama, navigation, UI ve form davranışları gibi ana fonksiyonelliklerinin beklendiği gibi çalıştığı doğrulandı. LLM-QA sisteminin bu süreçte kullanılması, test yazma süresini önemli ölçüde azaltabilir ve daha kaliteli, bakımı kolay test kodları üretilmesini sağlayabilir.
+
