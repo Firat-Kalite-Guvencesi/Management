@@ -58,3 +58,32 @@ The LLM-QA architecture is designed to operate as a middleware between static an
 
 1.  **Semantic Defect Extraction:** The system ingests static warnings and source code context...
 2.  **Targeted Test Generation:** Utilizing a specialized prompt strategy to generate "proving" tests...
+
+---
+
+### REFERENCES (under development)
+
+Abtahi, S. M., & Azim, A. (2025). Augmenting Large Language Models with Static Code Analysis for Automated Code Quality Improvements. _2025 IEEE/ACM Second International Conference on AI Foundation Models and Software Engineering (Forge)_, 17–27. [https://doi.org/10.1109/Forge66646.2025.00017](https://www.google.com/search?q=https://doi.org/10.1109/Forge66646.2025.00017)
+
+Casola, V., De Benedictis, A., Mazzocca, C., & Orbinato, V. (2024). Secure software development and testing: A model-based methodology. _Computers & Security, 137_, 103639. [https://doi.org/10.1016/j.cose.2023.103639](https://doi.org/10.1016/j.cose.2023.103639)
+
+Dakhel, A. M., Nikanjam, A., Majdinasab, V., Khomh, F., & Desmarais, M. C. (2024). Effective test generation using pre-trained Large Language Models and mutation testing. _Information and Software Technology, 171_, 107468. [https://doi.org/10.1016/j.infsof.2024.107468](https://doi.org/10.1016/j.infsof.2024.107468)
+
+Fawareh, H., Al-Shdaifat, H. M., & Khouj, M. (2024). Investigates the Impact of AI-generated Code Tools on Software Readability Code Quality Factor. _2024 25th International Arab Conference on Information Technology (ACIT)_. [https://doi.org/10.1109/ACIT62805.2024.10876897](https://doi.org/10.1109/ACIT62805.2024.10876897)
+
+Fu, Y., Liang, P., Tahir, A., Li, Z., Shahin, M., Yu, J., & Chen, J. (2025). Security Weaknesses of Copilot-Generated Code in GitHub Projects: An Empirical Study. _ACM Transactions on Software Engineering and Methodology, 34_(8), Article 218.
+
+Kaksonen, R., Laakso, M., & Takanen, A. (2001). Software Security Assessment through Specification Mutations and Fault Injection. In _Communications and Multimedia Security Issues of the New Century_ (pp. 2704–2715). Kluwer Academic Publishers.
+
+Kodithuwakku, T., & Wickramaarachchi, D. (2025). Assessing the Limits of Automated Accessibility Testing: Insights for QA Engineers and Tool Developers. _2025 5th International Conference on Advanced Research in Computing (ICARC)_. [https://doi.org/10.1109/ICARC64760.2025.10963173](https://www.google.com/search?q=https://doi.org/10.1109/ICARC64760.2025.10963173)
+
+Li, H., Hao, Y., Zhai, Y., & Qian, Z. (2025). Enhancing Static Analysis for Practical Bug Detection: An LLM-Integrated Approach. _Proceedings of the ACM on Software Engineering_.
+
+Mascia, C., Guerriero, A., Giamattei, L., Pietrantuono, R., & Russo, S. (2025). Microservices Performance Testing with Causality-enhanced Large Language Models. _2025 IEEE/ACM Second International Conference on AI Foundation Models and Software Engineering (Forge)_. [https://doi.org/10.1109/Forge66646.2025.00022](https://www.google.com/search?q=https://doi.org/10.1109/Forge66646.2025.00022)
+
+Perry, N., Kemerlis, V. P., & Rodes, B. (2024). The Invisible Risk: Configuration Security in Modern Web Applications. _Proceedings of the 2024 ACM SIGSAC Conference on Computer and Communications Security_.
+
+Veracode. (2025). _State of Software Security 2025_. Veracode. [https://www.veracode.com/state-of-software-security-report](https://www.google.com/search?q=https://www.veracode.com/state-of-software-security-report)
+
+Wang, X., Li, Y., & Zhou, Z. (2024). Software Testing With Large Language Models: Survey, Landscape, and Vision. _IEEE Transactions on Software Engineering, 50_(4), 911–936.
+
