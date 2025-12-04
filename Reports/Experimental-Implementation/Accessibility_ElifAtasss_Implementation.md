@@ -33,6 +33,7 @@ The inability to access the Email and Password form fields on the Login page usi
 
 **Process Log:**
 After the application was successfully run, keyboard navigation (Tab key) testing was applied as the first step. Focus transitions were seamless between the page title, menu, and upper-section buttons. However, the keyboard focus was entirely skipped on the most critical areas, the Email and Password form fields, and it was determined that these fields could not be accessed using the keyboard. The error was identified as a violation of the WCAG 2.1.1 Keyboard standard.
+
 **Biggest "Pain Point" / "Struggle":**
 Deciding which tool (such as Axe-core or Cypress) to use to generate error evidence with an automated test and carrying out the integration of these tools into the Node.js project is the most challenging part with my current knowledge. The phase of writing the automated test code is the most expertise-demanding and challenging part of this task.
 
